@@ -17,6 +17,7 @@ class BlackJackTests(unittest.TestCase):
 
 		self.assertEqual(res, True)
 
+
 	def test_dealer_take_100_from_player_dollars(self):
 		player = PlayerBuilder().withCash(100).create()
 		dealer = Dealer()
@@ -24,6 +25,16 @@ class BlackJackTests(unittest.TestCase):
 		dealer.buyChips(player, 100)
 
 		self.assertEqual(player.cash, 0)
+
+
+	def test_dealer_take_100_from_player_dollars_then_he_or_she_give_100_chips_to_player(self):
+		player = PlayerBuilder().withCash(100).create()
+		dealer = Dealer()
+
+		dealer.buyChips(player, 100)
+
+		self.assertEqual(player.chips, 100)
+
 
 if __name__ == '__main__':
 	unittest.main()
