@@ -3,7 +3,7 @@ from blackjack import Player
 from blackjack import Dealer
 from blackjack import YoungerPlayer
 from blackjack import PlayerBuilder
-
+from blackjack import HandBuilder
 
 class BlackJackTests(unittest.TestCase):
 	def test_dealer_call_security_if_player_younger_18_years_old_buying_chips(self):
@@ -35,6 +35,13 @@ class BlackJackTests(unittest.TestCase):
 
 		self.assertEqual(player.chips, 100)
 
+	def test_dealer_give_me_x2_bet_prize_if_players_hand_win(self):
+		player = PlayerBuilder().withChips(100).withBet(100).withHand(HandBuilder().withWin().create()).create()
+		dealer = Dealer()
+
+		dealer.settleGame(player)
+
+		self.assertEqual(player.chips, 200)
 
 if __name__ == '__main__':
 	unittest.main()
